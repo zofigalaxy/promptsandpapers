@@ -5,7 +5,7 @@ and you receive your papers in your inbox regularly. This approach works very we
 No need to install anything, everything is handled via the interface at [promptsandpapers.com](https://promptsandpapers.com).
 
 ### Features
-- Daily scraping of recent arXiv papers. Instead of using arXiv's API, we scrape papers exactly on the day they appear on the website, so you always have the most recent papers 
+- Daily scraping of recent arXiv papers. Instead of using arXiv's API, we scrape papers exactly on the day they appear on the website, so you're always up to date.
 - An LLM (right now it's GPT-4o) that classifies papers in relevant vs. not relevant based on your unique reserach interests. You don't need to have a huge library of papers to teach the
 model your interests, instead simply describe your research interests in a prompt. You can be specific and nuanced, no need for vague keywords.
 - A daily or weekly newsletter with the relevant papers. The selected papers include an AI-generated summary (currently using GPT-4o-mini) and a short
