@@ -1,0 +1,38 @@
+name: Send Newsletter to Subscribers
+
+on:
+  schedule:
+    - cron: '0 8 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Send newsletters
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          SENDGRID_KEY: ${{ secrets.SENDGRID_KEY }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          python send_daily_automated.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Newsletter send failed - check logs"
