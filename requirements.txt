@@ -1,0 +1,11 @@
+openai
+sendgrid
+supabase
+requests
+beautifulsoup4
+scikit-learn
+PyPDF2
+numpy
+gspread
+google-auth
+pandas
