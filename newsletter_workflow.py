@@ -708,7 +708,7 @@ def _format_review_section_headers(review_text):
     for header in section_headers:
         # Match header at start of line
         pattern = rf'(^|\n)\s*({re.escape(header)}):?\s*(\n|$)'
-        replacement = rf'\1<i style="display: block; margin-top: 24px; margin-bottom: 0; font-weight: 600;">\2</i>\3'
+        replacement = rf'\1<i style="display: block; margin-top: 24px; margin-bottom: 0; font-weight: 600;">\2</i>'
         review_text = re.sub(pattern, replacement, review_text, flags=re.MULTILINE)
     
     # Convert newlines to HTML breaks
@@ -782,10 +782,10 @@ def create_email_html(relevant_papers, subscriber, send_empty=True):
                         <h3 style="margin: 0; color: #0f172a; font-size: 18px; line-height: 1.4;">
                             {paper_number}. {title}
                         </h3>
-                        <p style="margin: 0 0 5px 0; font-size: 14px; color: #111827;">
+                        <p style="margin: 0 0 5px 0; font-size: 14px; color: #0f172a;">
                             <strong>Authors:</strong> {', '.join(paper['authors'])}
                         </p>
-                        <p style="margin: 0; font-size: 13px; color: #111827;">
+                        <p style="margin: 0; font-size: 13px; color: #0f172a;">
                             <strong>arXiv ID:</strong> {paper['arxiv_id']}
                         </p>
                     </td>
@@ -794,10 +794,10 @@ def create_email_html(relevant_papers, subscriber, send_empty=True):
                         <table cellpadding="0" cellspacing="0" style="margin: 0 0 0 auto;">
                             <tr>
                                 <td style="padding: 0 2px;">
-                                    <a href="{recent_papers_link}" style="display: block; width: 36px; height: 36px; background: #0f172a; color: white; text-decoration: none; border-radius: 4px; font-size: 18px; line-height: 36px; text-align: center; font-weight: bold;">+</a>
+                                    <a href="{recent_papers_link}" style="display: block; width: 36px; height: 36px; background: #0f172a; color: white; border: 2px solid #0f172a; text-decoration: none; border-radius: 4px; font-size: 18px; line-height: 32px; text-align: center; font-weight: bold; box-sizing: border-box;">+</a>
                                 </td>
                                 <td style="padding: 0 2px;">
-                                    <a href="{recent_papers_link}" style="display: block; width: 36px; height: 36px; background: white; color: #0f172a; border: 2px solid #0f172a; text-decoration: none; border-radius: 4px; font-size: 18px; line-height: 32px; text-align: center; font-weight: bold;">-</a>
+                                    <a href="{recent_papers_link}" style="display: block; width: 36px; height: 36px; box-sizing: border-box; background: white; color: #0f172a; border: 2px solid #0f172a; text-decoration: none; border-radius: 4px; font-size: 18px; line-height: 32px; text-align: center; font-weight: bold;">-</a>
                                 </td>
                             </tr>
                         </table>
