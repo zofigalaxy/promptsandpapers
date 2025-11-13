@@ -30,7 +30,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          python send_daily_automated.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+          python newsletter_workflow.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
 
       - name: Notify on failure
         if: failure()
