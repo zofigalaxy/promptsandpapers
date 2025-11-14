@@ -748,7 +748,7 @@ def create_email_html(relevant_papers, subscriber, send_empty=True):
         <html>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
             <div style="background: #1976D2; color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
-                <h1 style="margin: 0 0 10px 0; font-size: 28px; font-weight: 600;">Your Paper Selection</h1>
+                <h1 style="margin: 0 0 10px 0; font-size: 28px; font-weight: 600;">Your Paper Selection by Prompts & Papers</h1>
                 <p style="margin: 0; font-size: 16px; opacity: 0.9;">Hello {subscriber_name}!</p>
             </div>
             <div style="background: white; padding: 30px; border-radius: 8px; text-align: center;">
