@@ -58,7 +58,7 @@ def load_subscribers():
     """Load all active subscribers from Supabase"""
     try:
         print("Querying Supabase for active subscribers...")
-        response = supabase.table('user_profiles').select("*").eq('active', True).execute()
+        response = supabase.table('user_profiles').select("*").eq('active', True).eq('email_enabled', True).execute()
         return response.data
         
     except Exception as e:
