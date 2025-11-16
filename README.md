@@ -14,5 +14,5 @@ reasoning that explains why the model thinks the papers is relevant to you. This
 - An interface where you can see your papers, prompt and statistics showing how many papers you receive.
 
 ### Future Improvements
-This project is still under development and some functionalities are limited. In the future we will experiment with more LLMs, add more options and analytics and make more sophisticated paper 
+This project is still evolving and some functionalities are limited. In the future we will experiment with more LLMs, add more options and analytics and make more sophisticated paper 
 classification based on user's feedback. We welcome any comments and suggestion at contact@promptsandpapers.com!
