@@ -703,7 +703,7 @@ def _format_review_section_headers(review_text):
     Returns:
         HTML-formatted review with styled headers
     """
-    section_headers = ['Paper Overview', 'Methodology', 'Main Findings', 'Relevance', 'Limitations']
+    section_headers = ['Paper Overview', 'Methodology', 'Main Findings', 'Relevance to Your Prompt', 'Limitations']
     
     for header in section_headers:
         # Match header at start of line
