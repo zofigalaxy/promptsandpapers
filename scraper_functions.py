@@ -283,7 +283,7 @@ class ArxivWebScraper:
         Main Findings
         The paper's primary results, measurements, and conclusions.
         
-        Relevance
+        Relevance to Your Prompt
         Explain how this work connects to the users' research interests described in the prompt.
         
         
@@ -324,7 +324,7 @@ class ArxivWebScraper:
         Main Findings
         The paper's primary results, measurements, and conclusions.
         
-        Relevance
+        Relevance to Your Prompt
         Explain how this work connects to the users' research interests described in the prompt.
         
         Be thorough but focused. This is for a science newsletter for researchers, so make it informative and engaging. Use plain text for section names - no bold, no bullets, no emojis or special symbols, no special formatting. Write clear paragraphs for each section.
