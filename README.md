@@ -1,6 +1,6 @@
 # Prompts & Papers
 
-This is an LLM-based project developed to help researchers tackle the daily inflow of scientific papers. You describe your research interests, and your prompt gets fed to the LLM, which finds the right papers for you and sends them to your inbox regularly. This approach works very well for nuanced and niche fields, where simple keyword search or embedding-based approaches don't classify papers with enough detail. No need to install anything; everything is handled via the interface at [promptsandpapers.com](https://promptsandpapers.com).
+This is an LLM-based project developed to help researchers tackle the daily inflow of scientific papers. You describe your research interests, and your prompt gets fed to the LLM, which finds the right papers for you and sends them to your inbox regularly. This approach works very well for nuanced and niche fields, where a simple keyword search or embedding-based approaches don't classify papers with enough detail. No need to install anything; everything is handled via the interface at [promptsandpapers.com](https://promptsandpapers.com).
 
 ### Features
 - Daily scraping of recent arXiv papers. Instead of using arXiv's API, we scrape papers exactly on the day they appear on the website, so you're always up-to-date.
