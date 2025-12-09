@@ -9,3 +9,4 @@ numpy
 gspread
 google-auth
 pandas
+sib-api-v3-sdk
