@@ -10,8 +10,8 @@ import os
 from datetime import datetime, timedelta
 from openai import OpenAI
 from scraper_functions import ArxivWebScraper
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 from supabase import create_client, Client
 import urllib.parse
 import hashlib
@@ -25,7 +25,7 @@ import sys
 # ============================================
 
 OPENAI_KEY = os.environ.get('OPENAI_KEY', '')
-SENDGRID_KEY = os.environ.get('SENDGRID_KEY', '')
+BREVO_KEY = os.environ.get('BREVO_KEY', '')
 FROM_EMAIL = os.environ.get('FROM_EMAIL', '')
 SUPABASE_URL = os.environ.get('SUPABASE_URL', '')
 SUPABASE_KEY = os.environ.get('SUPABASE_SERVICE_KEY', '')
@@ -849,7 +849,7 @@ def create_email_html(relevant_papers, subscriber, send_empty=True):
 
 def send_email(to_email, subject, html_content):
     """
-    Send HTML email via SendGrid API with automatic retry on server errors.
+    Send HTML email via Brevo API with automatic retry on server errors.
     
     Args:
         to_email: User email address
@@ -860,7 +860,7 @@ def send_email(to_email, subject, html_content):
         Tuple of (success: bool, result: int|str)
     """
     # Validation
-    if not SENDGRID_KEY or not FROM_EMAIL:
+    if not BREVO_KEY or not FROM_EMAIL:
         return False, "Email not configured"
     
     if not html_content or not html_content.strip():
@@ -869,24 +869,30 @@ def send_email(to_email, subject, html_content):
     if not to_email or '@' not in to_email:
         return False, "Invalid recipient email"
     
+    # Configure Brevo
+    configuration = sib_api_v3_sdk.Configuration()
+    configuration.api_key['api-key'] = BREVO_KEY
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+        sib_api_v3_sdk.ApiClient(configuration)
+    )
+    
     # Attempt to send with retry
     last_error = None
     
     for attempt in range(MAX_EMAIL_RETRIES):
         try:
-            message = Mail(
-                from_email=FROM_EMAIL,
-                to_emails=to_email,
+            send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+                to=[{"email": to_email}],
+                sender={"email": FROM_EMAIL},
                 subject=subject,
                 html_content=html_content
             )
             
-            sg = SendGridAPIClient(SENDGRID_KEY)
-            response = sg.send(message)
+            api_instance.send_transac_email(send_smtp_email)
             
-            return True, response.status_code
+            return True, 200
             
-        except Exception as e:
+        except ApiException as e:
             last_error = e
             error_str = str(e)
             
