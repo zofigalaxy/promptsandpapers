@@ -1335,7 +1335,7 @@ def main():
         0 if successful, 1 if errors occurred
     
     Environment variables required:
-        OPENAI_KEY, SENDGRID_KEY, FROM_EMAIL,
+        OPENAI_KEY, BREVO_KEY, FROM_EMAIL,
         SUPABASE_URL, SUPABASE_SERVICE_KEY
     """
     start_time = time.time()
@@ -1350,7 +1350,7 @@ def main():
     # Validate environment variables
     required_vars = {
         'OPENAI_KEY': OPENAI_KEY,
-        'SENDGRID_KEY': SENDGRID_KEY,
+        'BREVO_KEY': BREVO_KEY,
         'FROM_EMAIL': FROM_EMAIL,
         'SUPABASE_URL': SUPABASE_URL,
         'SUPABASE_SERVICE_KEY': SUPABASE_KEY
