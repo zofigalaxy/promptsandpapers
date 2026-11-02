@@ -292,7 +292,7 @@ class ArxivWebScraper:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="gpt-6-luna",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.0,
                 seed=42
@@ -331,7 +331,7 @@ class ArxivWebScraper:
         """
         
         response = self.client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-6-luna",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
             seed=42
