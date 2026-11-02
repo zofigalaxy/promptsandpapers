@@ -1018,7 +1018,7 @@ def _create_classification_filter(user_prompt, openai_client, min_conf=0.7):
         try:
             r = openai_client.chat.completions.create(
                 model="gpt-6-luna",
-                reasoning_effort="medium",
+                reasoning_effort="none",
                 messages=[
                     {"role": "system", "content": SYSTEM},
                     {"role": "user", "content": f"<interests>\n{user_prompt}\n</interests>\n\nTitle: {title}\nAbstract: {abstract}"},
