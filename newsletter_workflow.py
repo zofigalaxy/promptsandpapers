@@ -295,7 +295,7 @@ def detect_voting_patterns_with_ai(user_id, openai_client):
         print(f"   Sending to GPT-4 for analysis...")
         
         response = openai_client.chat.completions.create(
-            model="gpt-6-luna",
+            model="gpt-6.1-terra",
             messages=[{"role": "user", "content": analysis_prompt}],
             response_format={"type": "json_object"}
         )
@@ -1017,7 +1017,7 @@ def _create_classification_filter(user_prompt, openai_client, min_conf=0.7):
     def classify_paper(title, abstract):
         try:
             r = openai_client.chat.completions.create(
-                model="gpt-6-luna",
+                model="gpt-6.1-terra",
                 reasoning_effort="none",
                 messages=[
                     {"role": "system", "content": SYSTEM},
