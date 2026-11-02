@@ -1040,7 +1040,7 @@ Respond as JSON:
             response = openai_client.chat.completions.create(
                 model="gpt-6-luna",
                 messages=[{"role": "user", "content": formatted_prompt}],
-                temperature=0.0,
+                temperature=0.3,
                 seed=42,
                 timeout=30,
                 response_format={"type": "json_object"}
