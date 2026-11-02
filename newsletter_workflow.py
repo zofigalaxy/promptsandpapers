@@ -295,7 +295,7 @@ def detect_voting_patterns_with_ai(user_id, openai_client):
         print(f"   Sending to GPT-4 for analysis...")
         
         response = openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-6-luna",
             messages=[{"role": "user", "content": analysis_prompt}],
             response_format={"type": "json_object"}
         )
@@ -1007,53 +1007,31 @@ def should_send_newsletter_today(subscriber):
 # PAPER CLASSIFICATION
 # ============================================
 
-def _create_classification_filter(user_prompt, openai_client):
-    """
-    Create a classification function using a user's custom prompt.
-    
-    Args:
-        user_prompt: User's custom research interests/criteria
-        openai_client: Initialized OpenAI client
-    
-    Returns:
-        Function that classifies papers based on user's specific criteria
-    """
+SYSTEM = """You screen arXiv papers for a researcher whose interests are given in <interests>.
+Mark a paper relevant only if its main topic directly matches one of those interests.
+Not relevant: passing mentions, similar methods applied to an unrelated field, or merely adjacent topics.
+When unsure, mark it not relevant.
+Respond as JSON: {"is_relevant": true/false, "confidence": 0.0-1.0, "reasoning": "brief"}"""
+
+def _create_classification_filter(user_prompt, openai_client, min_conf=0.7):
     def classify_paper(title, abstract):
-        """Classify if paper is relevant to user's specific interests"""
-        
-        formatted_prompt = f"""You are a researcher evaluating whether an arXiv paper is relevant based on the user's research interests.
-
-{user_prompt}
-
-Paper to evaluate:
-Title: {title}
-Abstract: {abstract}
-
-Respond as JSON:
-{{"is_relevant": true/false,
-"confidence": 0.0-1.0,
-"reasoning": "Brief explanation"
-}}"""
-        
         try:
-            response = openai_client.chat.completions.create(
-                model="gpt-4o",
-                messages=[{"role": "user", "content": formatted_prompt}],
-                seed=42,
+            r = openai_client.chat.completions.create(
+                model="gpt-6-luna",
+                reasoning_effort="medium",
+                messages=[
+                    {"role": "system", "content": SYSTEM},
+                    {"role": "user", "content": f"<interests>\n{user_prompt}\n</interests>\n\nTitle: {title}\nAbstract: {abstract}"},
+                ],
+                response_format={"type": "json_object"},
                 timeout=30,
-                response_format={"type": "json_object"}
             )
-            
-            return json.loads(response.choices[0].message.content)
-            
+            res = json.loads(r.choices[0].message.content)
+            res["is_relevant"] = res["is_relevant"] and res["confidence"] >= min_conf
+            return res
         except Exception as e:
             print(f"    Error in classification: {e}")
-            return {
-                "is_relevant": False,
-                "confidence": 0.0,
-                "reasoning": f"Classification error: {str(e)}"
-            }
-    
+            return {"is_relevant": False, "confidence": 0.0, "reasoning": f"Classification error: {e}"}
     return classify_paper
 
 def process_subscriber(subscriber, scraped_papers):
