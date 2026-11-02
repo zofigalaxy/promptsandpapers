@@ -295,7 +295,7 @@ def detect_voting_patterns_with_ai(user_id, openai_client):
         print(f"   Sending to GPT-4 for analysis...")
         
         response = openai_client.chat.completions.create(
-            model="gpt-6-luna",
+            model="gpt-4o",
             messages=[{"role": "user", "content": analysis_prompt}],
             response_format={"type": "json_object"}
         )
@@ -1037,7 +1037,7 @@ Respond as JSON:
         
         try:
             response = openai_client.chat.completions.create(
-                model="gpt-6-luna",
+                model="gpt-4o",
                 messages=[{"role": "user", "content": formatted_prompt}],
                 seed=42,
                 timeout=30,
