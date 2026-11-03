@@ -287,7 +287,9 @@ class ArxivWebScraper:
         Explain how this work connects to the users' research interests described in the prompt.
         
         
-        Be thorough but focused. This is for a science newsletter for researchers, so make it informative and engaging. Use plain text for section names - no bold, no bullets, no emojis or special symbols, no special formatting. Write clear paragraphs for each section.
+        Be thorough but focused. This is for a science newsletter for researchers, so make it informative and engaging. 
+        Use plain text for section names - no bold, no bullets, no emojis or special symbols, no special formatting. 
+        Write clear paragraphs for each section. Make the text concise, use maximum 4-5 sentences per section.
         """
         
         try:
@@ -326,7 +328,9 @@ class ArxivWebScraper:
         Relevance to Your Prompt
         Explain how this work connects to the users' research interests described in the prompt.
         
-        Be thorough but focused. This is for a science newsletter for researchers, so make it informative and engaging. Use plain text for section names - no bold, no bullets, no emojis or special symbols, no special formatting. Write clear paragraphs for each section.
+        Be thorough but focused. This is for a science newsletter for researchers, so make it informative and engaging. 
+        Use plain text for section names - no bold, no bullets, no emojis or special symbols, no special formatting. 
+        Write clear paragraphs for each section. Make the text concise, use maximum 4-5 sentences per section.
         """
         
         response = self.client.chat.completions.create(
